@@ -6,9 +6,12 @@ from app.exceptions.users import UsernameTakenError, UserNotFoundError
 from app.exceptions.weather import CityNotFoundError
 from app.request_schemas import UserCreateRequest, UserUpdateRequest
 from app.services.weather import fetch_weather
-from app.validators.users import (CityValidator, UserBalanceUpdateValidator,
-                                  UserCreateRequestValidator,
-                                  UserUpdateRequestValidator)
+from app.validators.users import (
+    CityValidator,
+    UserBalanceUpdateValidator,
+    UserCreateRequestValidator,
+    UserUpdateRequestValidator,
+)
 
 
 @app.route("/users", methods=["GET"])
