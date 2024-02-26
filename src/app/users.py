@@ -1,4 +1,5 @@
 from flask import request
+from flask_caching import Cache
 
 from app import app
 from app.database.database import Database
@@ -6,12 +7,16 @@ from app.exceptions.users import UsernameTakenError, UserNotFoundError
 from app.exceptions.weather import CityNotFoundError
 from app.request_schemas import UserCreateRequest, UserUpdateRequest
 from app.services.weather import fetch_weather
-from app.validators.users import (
-    CityValidator,
-    UserBalanceUpdateValidator,
-    UserCreateRequestValidator,
-    UserUpdateRequestValidator,
-)
+from app.validators.users import (CityValidator, UserBalanceUpdateValidator,
+                                  UserCreateRequestValidator,
+                                  UserUpdateRequestValidator)
+
+cache = Cache(app=app, config={"CACHE_TYPE": "simple"})
+
+
+@cache.memoize(timeout=600)
+def cached_fetch_weather(city: str) -> dict:
+    return fetch_weather(city)
 
 
 @app.route("/users", methods=["GET"])
@@ -132,7 +137,7 @@ async def update_user_balance_by_city(user_id: int) -> dict | tuple[dict, int]:
         return errors, 400
 
     try:
-        weather = fetch_weather(city)
+        weather = cached_fetch_weather(city)
     except CityNotFoundError as e:
         return {"error": str(e)}, 404
 
