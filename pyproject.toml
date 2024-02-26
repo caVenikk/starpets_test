@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "starpets-test"
+version = "0.1.0"
+description = ""
+authors = ["Nikita <jimolostlal@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = {extras = ["async"], version = "^3.0.2"}
+aiosqlite = "^0.20.0"
+environs = "^10.3.0"
+requests = "^2.31.0"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.0.0"
+mypy = "^1.8.0"
+isort = "^5.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
