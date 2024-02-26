@@ -11,6 +11,7 @@ flask = {extras = ["async"], version = "^3.0.2"}
 aiosqlite = "^0.20.0"
 environs = "^10.3.0"
 requests = "^2.31.0"
+flask-caching = "^2.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
