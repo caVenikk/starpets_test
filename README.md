@@ -26,12 +26,6 @@
    ./venv/Scripts/activate
    pip install -r requirements.txt
    
-   # Запуск скрипта для создания БД
-   python3 ./src/app/database/cli.py <create/drop/fill>
-   # create - создание БД
-   # drop - удаление БД
-   # fill - заполнение БД тестовыми данными
-   
    # Установка переменных окружения, необходимых для запуска приложения
    # Windows (PowerShell)
    $env:PYTHONPATH='src/'
@@ -39,6 +33,12 @@
    # Unix
    export PYTHONPATH='src/'
    export FLASK_APP='src/runner.py'
+   
+   # Запуск скрипта для создания БД
+   python3 ./src/app/database/cli.py <create/drop/fill>
+   # create - создание БД
+   # drop - удаление БД
+   # fill - заполнение БД тестовыми данными
    
    # Запуск приложения
    flask --app src/runner.py run
